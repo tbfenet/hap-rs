@@ -279,6 +279,7 @@ async fn handle_exchange(
                 let device_ltpk = ed25519_dalek::PublicKey::from_bytes(
                     sub_tlv.get(&(Type::PublicKey as u8)).ok_or(tlv::Error::Unknown)?,
                 )?;
+                use signature::Signature;
                 let device_signature = ed25519_dalek::Signature::from_bytes(
                     sub_tlv.get(&(Type::Signature as u8)).ok_or(tlv::Error::Unknown)?,
                 )?;

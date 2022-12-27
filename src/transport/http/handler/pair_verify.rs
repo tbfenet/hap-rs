@@ -216,6 +216,9 @@ async fn handle_finish(
             debug!("received sub-TLV: {:?}", &sub_tlv);
             let device_pairing_id = sub_tlv.get(&(Type::Identifier as u8)).ok_or(tlv::Error::Unknown)?;
             debug!("raw device pairing ID: {:?}", &device_pairing_id);
+            
+            use signature::Signature;
+
             let device_signature = ed25519_dalek::Signature::from_bytes(
                 sub_tlv.get(&(Type::Signature as u8)).ok_or(tlv::Error::Unknown)?,
             )?;
